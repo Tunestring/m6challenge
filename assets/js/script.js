@@ -101,7 +101,6 @@ let loadSearchHistory = function() {
     }
   };
 
-
 loadSearchHistory();
 
 if (lastCitySearched != ""){
