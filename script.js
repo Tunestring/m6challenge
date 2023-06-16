@@ -43,10 +43,10 @@ async function fetchForecast(city) {
 }
 
 function displayCurrentWeather(data) {
-    const currentWeatherDiv = document.getElementById('current-weather');
+    const currentWeatherDiv = document.getElementById('current-weather').querySelector('.card-body');
     const weatherIcon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
     currentWeatherDiv.innerHTML = `
-        <h2>${data.name} (${new Date().toLocaleDateString()}) <img src="${weatherIcon}" alt="weather icon"></h2>
+        <h2 class="h5">${data.name} (${new Date().toLocaleDateString()}) <img src="${weatherIcon}" alt="weather icon"></h2>
         <p>Temperature: ${data.main.temp} °C</p>
         <p>Humidity: ${data.main.humidity}%</p>
         <p>Wind Speed: ${data.wind.speed} m/s</p>
@@ -61,7 +61,7 @@ function displayForecast(data) {
         const forecast = data.list[i];
         const weatherIcon = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
         forecastDiv.innerHTML += `
-            <div class="card">
+            <div class="card m-2" style="width: 12rem;">
                 <div class="card-body">
                     <h5 class="card-title">${new Date(forecast.dt_txt).toLocaleDateString()}</h5>
                     <img src="${weatherIcon}" alt="weather icon">
@@ -93,5 +93,5 @@ function addToSearchHistory(city) {
 function displayError(message) {
     const errorDiv = document.getElementById('error-message');
     errorDiv.textContent = message;
-    errorDiv.style.display = 'block';
+    errorDiv.classList.remove('d-none');
 }
