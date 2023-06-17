@@ -5,7 +5,6 @@ clearStorageButton.addEventListener('click', clearLocalStorage);
 
 document.getElementById('search-form').addEventListener('submit', performSearch);
 
-// Call displaySearchHistory on page load
 window.addEventListener('DOMContentLoaded', () => {
     displaySearchHistory();
 });
@@ -25,7 +24,7 @@ async function performSearch(event) {
         await fetchCurrentWeather(query);
         await fetchForecast(query);
         addToSearchHistory(city, state);
-        saveToLocalStorage(city, state); // Save search history to local storage
+        saveToLocalStorage(city, state);
         displaySearchHistory();
     } catch (error) {
         displayError(error.message);
@@ -107,7 +106,6 @@ function addToSearchHistory(city, state) {
     searchHistory.appendChild(listItem);
 }
 
-// Function to get state name from state abbreviation
 function getStateName(state) {
     const stateSelect = document.getElementById('state-input');
     return stateSelect.options[stateSelect.selectedIndex].text;
@@ -129,10 +127,8 @@ function displaySearchHistory() {
     const searchHistory = document.getElementById('search-history');
     searchHistory.innerHTML = '';
 
-    // Retrieve search history from local storage
     const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
 
-    // Display search history
     for (const item of history) {
         const listItem = document.createElement('li');
         listItem.textContent = `${item.city}, ${item.state}`;
@@ -146,7 +142,6 @@ function displaySearchHistory() {
     }
 }
 
-// Save search history to local storage
 function saveToLocalStorage(city, state) {
     const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
     searchHistory.push({ city, state });
